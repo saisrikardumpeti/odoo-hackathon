@@ -1,5 +1,3 @@
-
-
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { api } from "@/lib/api"
 
@@ -25,7 +23,7 @@ export function useAuth() {
     queryKey: ["auth", "user"],
     queryFn: async () => {
       try {
-        const response = await api.get("/auth/me")
+        const response = await api.get("/auth/session")
         return response.data as User
       } catch (error: any) {
         if (error.status === 401) {

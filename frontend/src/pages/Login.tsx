@@ -18,7 +18,7 @@ export default function Login() {
   }, [user, navigate])
 
   const handleLogin = () => {
-    window.location.href = "http://localhost:3000/api/auth/github"
+    navigate("/api/auth/signin")
   }
 
   return (

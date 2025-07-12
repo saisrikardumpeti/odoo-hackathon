@@ -22,7 +22,7 @@ export default function Header() {
   const unreadCount = notifications?.filter((n) => !n.read).length || 0
 
   const handleLogin = () => {
-    window.location.href = "http://localhost:3000/api/auth/github"
+    navigate("/api/auth/signin")
   }
 
   const handleLogout = async () => {
