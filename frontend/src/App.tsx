@@ -1,33 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route } from "react-router-dom"
+import Layout from "@/components/layout/Layout"
+import Home from "@/pages/Home"
+import Login from "@/pages/Login"
+import QuestionDetail from "@/pages/QuestionDetail"
+import AskQuestion from "@/pages/AskQuestion"
+import Profile from "@/pages/Profile"
+import Tags from "@/pages/Tags"
+import Notifications from "@/pages/Notifications"
+import ProtectedRoute from "@/components/auth/ProtectedRoute"
+import { Toaster } from "./components/ui/sonner"
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="questions/:id" element={<QuestionDetail />} />
+          <Route
+            path="ask"
+            element={
+              <ProtectedRoute>
+                <AskQuestion />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="tags" element={<Tags />} />
+          <Route
+            path="notifications"
+            element={
+              <ProtectedRoute>
+                <Notifications />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
+      </Routes>
+      <Toaster />
     </>
   )
 }
