@@ -10,6 +10,7 @@ export const answers = pgTable('answers', {
   userId: varchar('user_id', { length: 128 })
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
+  username: text('username').unique(),
   questionId: varchar('question_id', { length: 128 })
     .notNull()
     .references(() => questions.id, { onDelete: 'cascade' }),
